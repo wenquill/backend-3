@@ -31,7 +31,7 @@ class Customer {
       const selectQuery = `
         SELECT *
         FROM customers
-        WHERE ${id}
+        WHERE id = ${id}
       `;
       const foundCustomer = await Customer.pool.query(selectQuery);
       return foundCustomer.rows[0];
@@ -47,7 +47,7 @@ class Customer {
             last_name = ${lastName}, 
             email = ${email}, 
             tel = ${tel}
-        WHERE ${id}
+        WHERE id = ${id}
         RETURNING *
       `;
       const updatedCustomer = await Customer.pool.query(updateQuery);
@@ -61,7 +61,7 @@ class Customer {
       const deleteQuery = `
         DELETE
         FROM customers
-        WHERE ${id}
+        WHERE id = ${id}
         RETURNING *
       `;
       const deletedCustomer = await Customer.pool.query(deleteQuery);

@@ -1,0 +1,7 @@
+### 200
+
+GET http://localhost:3000/api/customers/1 HTTP/1.1
+
+### 404
+
+GET http://localhost:3000/api/customers/100
