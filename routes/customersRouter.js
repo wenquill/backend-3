@@ -1,13 +1,13 @@
 const { Router } = require('express');
 const { customerControllers } = require('./../controllers');
-
+const { validation, pagination } = require('./../middleware');
 // /api/customers
 const customersRouter = Router();
 
 customersRouter
   .route('/')
-  .post(customerControllers.createCustomer)
-  .get(customerControllers.getAllCustomers);
+  .post(validation.validateCustomerOnCreate, customerControllers.createCustomer)
+  .get(pagination.paginateCustomer, customerControllers.getAllCustomers);
 
 customersRouter
   .route('/:id')
