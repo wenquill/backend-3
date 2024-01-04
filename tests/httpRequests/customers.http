@@ -5,3 +5,19 @@ GET http://localhost:3000/api/customers/1 HTTP/1.1
 ### 404
 
 GET http://localhost:3000/api/customers/100
+
+### 201
+
+POST http://localhost:3000/api/customers
+Content-Type: application/json
+
+{
+    "firstName": "Test",
+    "lastName": "Testovych",
+    "email": "maill@mail.com",
+    "tel": "+380123455789"
+}
+
+### 200
+
+GET http://localhost:3000/api/customers HTTP/1.1

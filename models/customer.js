@@ -10,7 +10,7 @@ class Customer {
       const createdCustomer = await Customer.pool.query(insertQuery); // виконати його
       return createdCustomer.rows[0]; // повернути результат
     } catch (err) {
-      console.log('err :>> ', err); // або помилку
+      throw new Error(err.detail); // або помилку
     }
   }
   static async getAll ({ limit, offset }) {
@@ -18,12 +18,13 @@ class Customer {
       const selectAllQuery = `
         SELECT *
         FROM customers
+        ORDER BY id
         LIMIT ${limit} OFFSET ${offset}
       `;
       const foundCustomers = await Customer.pool.query(selectAllQuery);
       return foundCustomers.rows;
     } catch (err) {
-      console.log('err :>> ', err);
+      throw new Error(err.detail);
     }
   }
   static async getById (id) {
