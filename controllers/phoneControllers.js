@@ -79,19 +79,3 @@ module.exports.deletePhoneById = async (req, res) => {
   }
 };
 
-module.exports.getCustomerPhones = async (req, res) => {
-    const { id } = req.params;
-  
-    try {
-      const foundedPhones = await Phone.getCustomersPhones(id);
-  
-      if (!foundedPhones) {
-        return res.status(404).send('Phones not found');
-      }
-  
-      res.status(204).send(foundedPhones);
-    } catch (err) {
-      console.log('error: ', err);
-      res.status(500).send('Server error');
-    }
-  };

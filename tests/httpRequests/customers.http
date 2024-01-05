@@ -70,3 +70,11 @@ DELETE http://localhost:5000/api/customers/8 HTTP/1.1
 ### 404
 
 DELETE http://localhost:5000/api/customers/118 HTTP/1.1
+
+### 200
+
+GET http://localhost:5000/api/customers/3/phones HTTP/1.1
+
+### 404
+
+GET http://localhost:5000/api/customers/212/phones HTTP/1.1
