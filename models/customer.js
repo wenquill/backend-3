@@ -40,17 +40,18 @@ class Customer {
       console.log('err :>> ', err);
     }
   }
-  static async updateById (id, { firstName, lastName, email, tel }) {
+  static async updateById (id, updatedFields) {
     try {
+      const updateQueryParams = Object.entries(updatedFields)
+        .map(([key, value]) => `${key} = '${value}'`)
+        .join(', ');
+
       const updateQuery = `
-        UPDATE customers
-        SET first_name = ${firstName}, 
-            last_name = ${lastName}, 
-            email = ${email}, 
-            tel = ${tel}
-        WHERE id = ${id}
-        RETURNING *
-      `;
+      UPDATE customers
+      SET ${updateQueryParams}
+      WHERE id = ${id}
+      RETURNING *
+    `;
       const updatedCustomer = await Customer.pool.query(updateQuery);
       return updatedCustomer.rows[0];
     } catch (err) {

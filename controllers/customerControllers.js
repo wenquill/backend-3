@@ -43,6 +43,38 @@ module.exports.getCustomerById = async (req, res) => {
   }
 };
 
-module.exports.updateCustomerById = (req, res) => {};
+module.exports.updateCustomerById = async (req, res) => {
+  const { id } = req.params;
+  const { body } = req;
+  console.log(body)
 
-module.exports.deleteCustomerById = (req, res) => {};
+  try {
+    const updCustomer = await Customer.updateById(id, body);
+
+    if (!updCustomer) {
+      return res.status(400).send('Something went wrong...');
+    }
+
+    res.status(200).send(updCustomer);
+  } catch (err) {
+    console.log('error: ', err);
+    res.status(500).send('Server error');
+  }
+};
+
+module.exports.deleteCustomerById = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const deletedCustomer = await Customer.deleteById(id);
+
+    if (!deletedCustomer) {
+      return res.status(404).send('Customer not found');
+    }
+
+    res.status(204).send(deletedCustomer);
+  } catch (err) {
+    console.log('error: ', err);
+    res.status(500).send('Server error');
+  }
+};
