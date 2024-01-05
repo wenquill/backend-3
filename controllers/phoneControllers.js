@@ -46,7 +46,7 @@ module.exports.getPhoneById = async (req, res) => {
 module.exports.updatePhoneById = async (req, res) => {
   const { id } = req.params;
   const { body } = req;
-  console.log(body)
+  console.log(body);
 
   try {
     const updatedPhone = await Phone.updateById(id, body);
@@ -78,4 +78,3 @@ module.exports.deletePhoneById = async (req, res) => {
     res.status(500).send('Server error');
   }
 };
-

@@ -1,9 +1,9 @@
 class Phone {
-  static async create ({ brand, model, price, color, manufactoring_year }) {
+  static async create ({ brand, model, price, color, manufacturing_year }) {
     try {
       const insertQuery = `
-        INSERT INTO phones (brand, model, price, color, manufactoring_year)
-        VALUES ('${brand}', '${model}', '${price}', '${color}', '${manufactoring_year}')
+        INSERT INTO phones (brand, model, price, color, manufacturing_year)
+        VALUES ('${brand}', '${model}', '${price}', '${color}', '${manufacturing_year}')
         RETURNING *
       `;
       const createdPhone = await Phone.pool.query(insertQuery);
