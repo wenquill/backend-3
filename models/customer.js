@@ -37,7 +37,7 @@ class Customer {
       const foundCustomer = await Customer.pool.query(selectQuery);
       return foundCustomer.rows[0];
     } catch (err) {
-      console.log('err :>> ', err);
+      throw new Error(err.detail);
     }
   }
   static async updateById (id, updatedFields) {
@@ -55,7 +55,7 @@ class Customer {
       const updatedCustomer = await Customer.pool.query(updateQuery);
       return updatedCustomer.rows[0];
     } catch (err) {
-      console.log('err :>> ', err);
+      throw new Error(err.detail);
     }
   }
   static async deleteById (id) {
@@ -69,7 +69,7 @@ class Customer {
       const deletedCustomer = await Customer.pool.query(deleteQuery);
       return deletedCustomer.rows[0];
     } catch (err) {
-      console.log('err :>> ', err);
+      throw new Error(err.detail);
     }
   }
 }
