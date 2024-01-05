@@ -18,9 +18,15 @@ module.exports.createPhone = async (req, res) => {
 
 module.exports.getAllPhones = async (req, res) => {
   const { pagination } = req;
+  const { brand } = req.query;
 
   try {
-    const foundedPhones = await Phone.getAll(pagination);
+    if (brand) {
+      const foundedPhones = await Phone.getAllByBrand(brand);
+      return res.status(200).send(foundedPhones);
+    }
+
+    const foundedPhones = await Phone.getAll(pagination, brand);
     res.status(200).send(foundedPhones);
   } catch (err) {
     res.status(500).send('Server error');

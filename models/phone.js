@@ -28,6 +28,20 @@ class Phone {
     }
   }
 
+  static async getAllByBrand (brand) {
+    try {     
+      const selectAllQuery = `
+        SELECT *
+        FROM phones
+        WHERE brand = '${brand}'
+      `;
+      const foundPhones = await Phone.pool.query(selectAllQuery);
+      return foundPhones.rows;
+    } catch (err) {
+      throw new Error(err.detail);
+    }
+  }
+
   static async getById (id) {
     try {
       const selectQuery = `
