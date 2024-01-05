@@ -38,7 +38,7 @@ class Phone {
       const foundPhone = await Phone.pool.query(selectQuery);
       return foundPhone.rows[0];
     } catch (err) {
-        throw new Error(err.detail);
+      throw new Error(err.detail);
     }
   }
 
@@ -71,6 +71,24 @@ class Phone {
       `;
       const deletedPhone = await Phone.pool.query(deleteQuery);
       return deletedPhone.rows[0];
+    } catch (err) {
+      throw new Error(err.detail);
+    }
+  }
+
+  static async getCustomersPhones (customerId) {
+    try {
+      const selectQuery = `
+        SELECT p.id AS "phone_id", brand, model, price, color, manufacturing_year, amount
+        FROM orders o 
+            INNER JOIN phones_to_orders po ON o.id = po.order_id
+            INNER JOIN phones p ON p.id = po.phone_id
+        WHERE o.customer_id = ${customerId}
+        ORDER BY p.id;
+      `;
+
+      const foundedPhones = await Phone.pool.query(selectQuery);
+      return foundedPhones.rows;
     } catch (err) {
       throw new Error(err.detail);
     }
