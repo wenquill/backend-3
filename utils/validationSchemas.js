@@ -1,8 +1,9 @@
 const yup = require('yup');
+const NAME_VAL_SCHEMA = yup.string().trim().min(2).max(32);
 
 module.exports.CREATE_CUSTOMER_VALIDATION_SCHEMA = yup.object({
-  firstName: yup.string().trim().min(2).max(32).required(),
-  lastName: yup.string().trim().min(2).max(32).required(),
+  firstName: NAME_VAL_SCHEMA.required(),
+  lastName: NAME_VAL_SCHEMA.required(),
   email: yup.string().email(),
   tel: yup
     .string()
@@ -13,8 +14,8 @@ module.exports.CREATE_CUSTOMER_VALIDATION_SCHEMA = yup.object({
 });
 
 module.exports.UPDATE_CUSTOMER_VALIDATION_SCHEMA = yup.object({
-  first_name: yup.string().trim().min(2).max(32),
-  last_name: yup.string().trim().min(2).max(32),
+  first_name: NAME_VAL_SCHEMA,
+  last_name: NAME_VAL_SCHEMA,
   email: yup.string().email(),
   tel: yup
     .string()
@@ -25,16 +26,16 @@ module.exports.UPDATE_CUSTOMER_VALIDATION_SCHEMA = yup.object({
 });
 
 module.exports.CREATE_PHONE_VALIDATION_SCHEMA = yup.object({
-  brand: yup.string().trim().min(2).max(32).required(),
-  model: yup.string().trim().min(2).max(32).required(),
+  brand: NAME_VAL_SCHEMA.required(),
+  model: NAME_VAL_SCHEMA.required(),
   price: yup.number().min(0).required(),
   color: yup.string().trim().max(32),
   manufacturing_year: yup.number().integer().min(1970).max(new Date().getFullYear()),
 });
 
 module.exports.UPDATE_PHONE_VALIDATION_SCHEMA = yup.object({
-  brand: yup.string().trim().min(2).max(32),
-  model: yup.string().trim().min(2).max(32),
+  brand: NAME_VAL_SCHEMA,
+  model: NAME_VAL_SCHEMA,
   price: yup.number().min(0),
   color: yup.string().trim().max(32),
   manufacturing_year: yup.number().integer().min(1970).max(new Date().getFullYear()),

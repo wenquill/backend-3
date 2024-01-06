@@ -18,6 +18,6 @@ customersRouter
   )
   .delete(customerControllers.deleteCustomerById);
 
-customersRouter.route('/:id/phones').get(customerControllers.getCustomerPhones);
+customersRouter.get('/:id/phones', customerControllers.getCustomerPhones);
 
 module.exports = customersRouter;

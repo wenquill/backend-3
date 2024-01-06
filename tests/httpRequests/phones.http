@@ -29,7 +29,7 @@ GET http://localhost:5000/api/phones?page=2&results=5 HTTP/1.1
 
 ### 200 {}
 
-GET http://localhost:5000/api/phones?brand=IPhone HTTP/1.1
+GET http://localhost:5000/api/phones?brand=IPhone&page=1&results=5 HTTP/1.1
 
 ### 200
 

@@ -46,13 +46,12 @@ module.exports.getCustomerById = async (req, res) => {
 module.exports.updateCustomerById = async (req, res) => {
   const { id } = req.params;
   const { body } = req;
-  console.log(body);
-
+  
   try {
     const updCustomer = await Customer.updateById(id, body);
 
     if (!updCustomer) {
-      return res.status(400).send('Something went wrong...');
+      return res.status(404).send('Customer not found ):');
     }
 
     res.status(200).send(updCustomer);

@@ -21,11 +21,6 @@ module.exports.getAllPhones = async (req, res) => {
   const { brand } = req.query;
 
   try {
-    if (brand) {
-      const foundedPhones = await Phone.getAllByBrand(brand);
-      return res.status(200).send(foundedPhones);
-    }
-
     const foundedPhones = await Phone.getAll(pagination, brand);
     res.status(200).send(foundedPhones);
   } catch (err) {

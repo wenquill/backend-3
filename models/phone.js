@@ -13,14 +13,14 @@ class Phone {
     }
   }
 
-  static async getAll ({ limit, offset }) {
+  static async getAll ({ limit, offset }, brand) {
     try {
-      const selectAllQuery = `
+      const selectAllQuery =
+        `
         SELECT *
-        FROM phones
-        ORDER BY id
-        LIMIT ${limit} OFFSET ${offset}
-      `;
+        FROM phones` +
+        (brand ? ` WHERE brand = '${brand}'` : '') +
+        (limit ? ` ORDER BY id LIMIT ${limit} OFFSET ${offset}` : '');
       const foundPhones = await Phone.pool.query(selectAllQuery);
       return foundPhones.rows;
     } catch (err) {
@@ -29,7 +29,7 @@ class Phone {
   }
 
   static async getAllByBrand (brand) {
-    try {     
+    try {
       const selectAllQuery = `
         SELECT *
         FROM phones
